@@ -11,8 +11,8 @@ Build-Depends:
 Standards-Version: 4.7.0
 Homepage: https://github.com/stickerdaniel/linkedin-mcp-server
 Rules-Requires-Root: no
-Vcs-Git: https://salsa.debian.org/debian/linkedin-mcp-server.git
-Vcs-Browser: https://salsa.debian.org/debian/linkedin-mcp-server
+Vcs-Git: https://github.com/Vitexus/linkedin-mcp-server.git
+Vcs-Browser: https://github.com/Vitexus/linkedin-mcp-server
 
 Package: linkedin-mcp-server
 Architecture: all
