@@ -1,0 +1,3 @@
+Tests: import-test
+Depends: @
+Restrictions: allow-stderr

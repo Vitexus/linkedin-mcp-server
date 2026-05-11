@@ -1,0 +1,40 @@
+Source: linkedin-mcp-server
+Section: net
+Priority: optional
+Maintainer: Vítězslav Dvořák <info@vitexsoftware.cz>
+Build-Depends:
+ debhelper-compat (= 13),
+ dh-python,
+ pybuild-plugin-pyproject,
+ python3-all,
+ python3-setuptools,
+Standards-Version: 4.7.0
+Homepage: https://github.com/stickerdaniel/linkedin-mcp-server
+Rules-Requires-Root: no
+Vcs-Git: https://salsa.debian.org/debian/linkedin-mcp-server.git
+Vcs-Browser: https://salsa.debian.org/debian/linkedin-mcp-server
+
+Package: linkedin-mcp-server
+Architecture: all
+Multi-Arch: foreign
+Depends:
+ ${misc:Depends},
+ ${python3:Depends},
+ python3-dotenv,
+ python3-fastmcp,
+ python3-inquirer,
+ python3-patchright,
+Description: MCP server for LinkedIn profile, company, and job scraping
+ linkedin-mcp-server provides a Model Context Protocol (MCP) server
+ that enables AI assistants such as Claude to scrape LinkedIn profiles,
+ company pages, and job listings using an automated Chromium browser session.
+ .
+ Supported features:
+  - Person profile scraping with configurable section selection
+  - Company profile and employee listing extraction
+  - Job search and detailed job listing retrieval
+  - LinkedIn feed access
+  - Secure credential storage with persistent browser session
+ .
+ The server exposes tools via the MCP protocol and can be integrated with
+ any MCP-compatible AI client.

@@ -1,0 +1,177 @@
+.TH LINKEDIN\-MCP\-SERVER 1 "2026-05-11" "4.13.0" "LinkedIn MCP Server"
+.SH NAME
+linkedin\-mcp\-server \- MCP server for LinkedIn profile, company, and job scraping
+.SH SYNOPSIS
+.B linkedin\-mcp\-server
+[\fIOPTIONS\fR]
+.SH DESCRIPTION
+.B linkedin\-mcp\-server
+is a Model Context Protocol (MCP) server that enables AI assistants such as
+Claude to interact with LinkedIn via an automated Chromium browser session.
+It exposes tools for scraping person profiles, company pages, job listings,
+and the LinkedIn feed.
+.PP
+The server supports two transport modes.
+In \fBstdio\fR mode (the default) it communicates with an MCP client over
+standard input/output and is suitable for direct process-level integration.
+In \fBstreamable-http\fR mode it listens on a local HTTP endpoint.
+.PP
+Before running the server for the first time, authenticate with LinkedIn
+using \fB\-\-login\fR.
+The resulting browser profile is stored under
+.I ~/.linkedin\-mcp/profile/
+and reused on subsequent starts.
+.SH OPTIONS
+.SS Session management
+.TP
+.B \-\-login
+Open an interactive browser window for LinkedIn authentication and save the
+resulting profile.
+Exits after the profile is saved.
+.TP
+.B \-\-status
+Check whether the saved session is still valid and exit.
+Exits with code\~0 on success, 1 on failure.
+.TP
+.B \-\-logout
+Clear the stored LinkedIn browser profile and exit.
+.SS Transport
+.TP
+\fB\-\-transport\fR \fIstdio\fR|\fIstreamable\-http\fR
+Select the MCP transport.
+\fBstdio\fR (default) communicates over standard input/output.
+\fBstreamable\-http\fR starts an HTTP server.
+.TP
+\fB\-\-host\fR \fIHOST\fR
+Hostname or IP address for the HTTP server (default: \fB127.0.0.1\fR).
+Binding to \fB0.0.0.0\fR exposes the endpoint to all network interfaces;
+the MCP endpoint has no built-in authentication.
+.TP
+\fB\-\-port\fR \fIPORT\fR
+TCP port for the HTTP server (default: \fB8000\fR).
+.TP
+\fB\-\-path\fR \fIPATH\fR
+URL path for the HTTP endpoint (default: \fB/mcp\fR).
+.SS Browser
+.TP
+.B \-\-no\-headless
+Run Chromium with a visible window.
+Useful during login and for debugging scraping issues.
+.TP
+\fB\-\-user\-data\-dir\fR \fIPATH\fR
+Directory used to persist the Chromium profile
+(default: \fB~/.linkedin\-mcp/profile\fR).
+.TP
+\fB\-\-chrome\-path\fR \fIPATH\fR
+Path to a custom Chrome or Chromium executable.
+Uses the patchright-managed browser by default.
+.TP
+\fB\-\-viewport\fR \fIWxH\fR
+Browser viewport dimensions (default: \fB1280x720\fR).
+.TP
+\fB\-\-timeout\fR \fIMS\fR
+Timeout for individual browser page operations in milliseconds
+(default: \fB5000\fR).
+.TP
+\fB\-\-slow\-mo\fR \fIMS\fR
+Delay every browser action by \fIMS\fR milliseconds.
+Useful for debugging.
+.TP
+\fB\-\-user\-agent\fR \fISTRING\fR
+Override the browser User-Agent header.
+.SS Server
+.TP
+\fB\-\-tool\-timeout\fR \fISECONDS\fR
+Per-tool MCP execution timeout in seconds (default: \fB180.0\fR).
+.TP
+\fB\-\-log\-level\fR \fIDEBUG\fR|\fIINFO\fR|\fIWARNING\fR|\fIERROR\fR
+Set the logging verbosity (default: \fBWARNING\fR).
+.SH ENVIRONMENT
+Environment variables are read before command-line arguments and can be
+overridden by them.
+.TP
+.B HEADLESS
+Set to \fB0\fR, \fBfalse\fR, \fBno\fR, or \fBoff\fR to disable headless mode.
+Set to \fB1\fR, \fBtrue\fR, \fByes\fR, or \fBon\fR to enable it.
+.TP
+.B LOG_LEVEL
+Logging level: \fBDEBUG\fR, \fBINFO\fR, \fBWARNING\fR, or \fBERROR\fR.
+.TP
+.B TRANSPORT
+Transport mode: \fBstdio\fR or \fBstreamable\-http\fR.
+.TP
+.B HOST
+HTTP server host.
+.TP
+.B PORT
+HTTP server port.
+.TP
+.B HTTP_PATH
+HTTP server URL path.
+.TP
+.B TIMEOUT
+Browser page-operation timeout in milliseconds.
+.TP
+.B TOOL_TIMEOUT
+Per-tool MCP execution timeout in seconds.
+.TP
+.B USER_AGENT
+Custom browser User-Agent string.
+.TP
+.B VIEWPORT
+Browser viewport in \fIWxH\fR format, e.g.\& \fB1920x1080\fR.
+.TP
+.B SLOW_MO
+Browser action delay in milliseconds.
+.TP
+.B CHROME_PATH
+Path to a custom Chrome/Chromium executable.
+.TP
+.B USER_DATA_DIR
+Path to the persistent Chromium profile directory.
+.SH FILES
+.TP
+.I ~/.linkedin\-mcp/profile/
+Default directory for the persistent Chromium browser profile and
+authentication state.
+A \fB.env\fR file in the current working directory is loaded automatically
+if present.
+.SH EXAMPLES
+Authenticate with LinkedIn for the first time:
+.PP
+.RS 4
+.EX
+linkedin\-mcp\-server \-\-login
+.EE
+.RE
+.PP
+Start the server in stdio mode (default, for MCP client integration):
+.PP
+.RS 4
+.EX
+linkedin\-mcp\-server \-\-transport stdio
+.EE
+.RE
+.PP
+Start the server in HTTP mode:
+.PP
+.RS 4
+.EX
+linkedin\-mcp\-server \-\-transport streamable\-http \-\-port 8080
+.EE
+.RE
+.PP
+Check whether the current session is still valid:
+.PP
+.RS 4
+.EX
+linkedin\-mcp\-server \-\-status
+.EE
+.RE
+.SH SEE ALSO
+.BR linkedin\-scraper\-mcp (1)
+.SH AUTHOR
+Daniel Sticker <daniel@sticker.name>
+.PP
+This manual page was written by Vítězslav Dvořák <info@vitexsoftware.cz>
+for the Debian distribution.

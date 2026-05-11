@@ -1,0 +1,17 @@
+linkedin-mcp-server for Debian
+===============================
+
+Before using this package you must authenticate with LinkedIn by running:
+
+  linkedin-mcp-server --login
+
+This will open a browser window for interactive login. The session is stored
+in ~/.linkedin-mcp/profile/ and reused on subsequent runs.
+
+The server requires Chromium to be installed. Install it with:
+
+  patchright install chromium
+
+or ensure the chromium package is installed on the system.
+
+ -- Vítězslav Dvořák <info@vitexsoftware.cz>  Mon, 11 May 2026 09:06:58 +0200

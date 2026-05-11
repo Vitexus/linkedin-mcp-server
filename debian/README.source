@@ -1,0 +1,8 @@
+linkedin-mcp-server for Debian
+===============================
+
+This package uses the 3.0 (native) source format because the debian/
+directory lives inside the upstream repository. No separate upstream
+tarball is used.
+
+ -- Vítězslav Dvořák <info@vitexsoftware.cz>  Mon, 11 May 2026 09:06:58 +0200

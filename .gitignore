@@ -209,3 +209,12 @@ scripts/snapshot_dumps/
 
 # Debug artifacts
 .debug/
+
+# Debian packaging build artifacts
+.pybuild/
+debian/.debhelper/
+debian/debhelper-build-stamp
+debian/files
+debian/*.substvars
+debian/*.debhelper
+debian/linkedin-mcp-server/

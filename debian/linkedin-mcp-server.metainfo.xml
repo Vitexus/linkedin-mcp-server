@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="console-application">
+  <id>io.github.stickerdaniel.linkedin-mcp-server</id>
+  <metadata_license>MIT</metadata_license>
+  <project_license>Apache-2.0</project_license>
+  <name>LinkedIn MCP Server</name>
+  <summary>MCP server for LinkedIn profile, company, and job scraping</summary>
+  <description>
+    <p>
+      LinkedIn MCP Server is a Model Context Protocol (MCP) server that lets AI
+      assistants such as Claude interact with LinkedIn. It drives a Chromium
+      browser session to scrape profiles, company pages, job listings, and the
+      LinkedIn feed on behalf of the authenticated user.
+    </p>
+    <p>Supported operations:</p>
+    <ul>
+      <li>Person profile scraping with configurable section selection</li>
+      <li>Company profile and employee listing extraction</li>
+      <li>Job search and detailed job listing retrieval</li>
+      <li>LinkedIn feed access</li>
+      <li>Secure credential storage with persistent browser session</li>
+    </ul>
+    <p>
+      The server speaks the MCP protocol over stdio or HTTP and can be
+      integrated with any MCP-compatible AI client.
+    </p>
+  </description>
+  <icon type="stock">linkedin-mcp-server</icon>
+  <provides>
+    <binary>linkedin-mcp-server</binary>
+    <binary>linkedin-scraper-mcp</binary>
+  </provides>
+  <categories>
+    <category>Network</category>
+    <category>ConsoleOnly</category>
+  </categories>
+  <url type="homepage">https://github.com/stickerdaniel/linkedin-mcp-server</url>
+  <url type="bugtracker">https://github.com/stickerdaniel/linkedin-mcp-server/issues</url>
+  <developer id="io.github.stickerdaniel">
+    <name>Daniel Sticker</name>
+  </developer>
+  <releases>
+    <release version="4.13.0" date="2025-05-10"/>
+  </releases>
+  <content_rating type="oars-1.1"/>
+</component>
